@@ -1,0 +1,181 @@
+/* Laboratorio de decodificacao: molduras retro e fita decorativa de Turing. */
+#jogo .painel {
+  border-color: #3b5738;
+  background: linear-gradient(135deg, #151b17f2, #090d0af2);
+  box-shadow: 0 0 0 3px #071008, 0 0 0 4px #263d28, 0 17px 36px #0009, inset 0 0 28px #b8ff2c08;
+}
+
+#jogo .painel::after {
+  content: "";
+  position: absolute;
+  inset: 7px;
+  pointer-events: none;
+  opacity: .23;
+  background: repeating-linear-gradient(0deg, transparent 0 5px, #b8ff2c0a 6px 7px, transparent 8px 12px);
+}
+
+#jogo .painel > * { position: relative; z-index: 1; }
+#jogo .placar::after { content: "NUCLEO DE PONTUACAO"; }
+#jogo .robo-painel::after { content: "ASSISTENTE DE DECODIFICACAO"; }
+#jogo .audio-painel::after { content: "CONTROLE DE AUDIO"; }
+#jogo .banco::after { content: "MEMORIA DE CODIGOS"; }
+#jogo .sinal::after { content: "CANAL DE SINAL OCULTO"; }
+#jogo .placar::after,#jogo .robo-painel::after,#jogo .audio-painel::after,#jogo .banco::after,#jogo .sinal::after {
+  position: absolute;
+  right: 11px;
+  bottom: 8px;
+  color: #b8ff2c55;
+  font: 700 6px "Space Mono", monospace;
+  letter-spacing: .7px;
+  pointer-events: none;
+}
+
+#jogo .puzzle { overflow: hidden; }
+#jogo .puzzle::after { content: "01001001 00100000 01000001 01001101"; right: 13px; bottom: 10px; color: #b8ff2c22; font: 700 7px "Space Mono", monospace; letter-spacing: 2px; }
+
+.maquina-turing {
+  position: relative;
+  display: grid;
+  grid-template-columns: 29px minmax(0, 1fr) 34px 29px;
+  align-items: center;
+  gap: 7px;
+  margin: 15px 0 8px;
+  padding: 10px 10px 23px;
+  border: 1px solid #405a3d;
+  background: linear-gradient(90deg, #0a0f0b, #131a14 48%, #0a0f0b);
+  overflow: hidden;
+}
+
+.maquina-turing::before {
+  content: "FITA DE TURING // CANAL 01";
+  position: absolute;
+  top: 4px;
+  left: 9px;
+  color: #b8ff2c88;
+  font: 700 6px "Space Mono", monospace;
+  letter-spacing: .8px;
+}
+
+.maquina-turing::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(0deg, transparent 0 4px, #b8ff2c09 5px 6px, transparent 7px 10px);
+}
+
+.rolo-turing { width: 28px; height: 28px; border: 4px double #8aa887; border-radius: 50%; background: radial-gradient(circle, #b8ff2c 0 2px, #192619 3px 7px, #091009 8px); box-shadow: 0 0 11px #b8ff2c44; animation: girar-rolo 4s linear infinite; }
+.fita-turing { position: relative; height: 25px; overflow: hidden; border-block: 1px solid #607b57; background: #050806; }
+.fita-turing i { position: absolute; left: 0; top: 5px; color: #d9ff7a; font: 700 10px "Space Mono", monospace; letter-spacing: 7px; white-space: nowrap; animation: mover-fita 7s linear infinite; }
+.cabeca-turing { position: relative; z-index: 1; height: 33px; width: 32px; border: 2px solid var(--verde); background: #172317; box-shadow: 0 0 12px #b8ff2c66; }
+.cabeca-turing::before { content: ""; position: absolute; top: -8px; left: 9px; width: 10px; height: 7px; border: 2px solid var(--verde); border-bottom: 0; }
+.cabeca-turing b { position: absolute; left: 50%; top: 10px; width: 5px; height: 5px; transform: translateX(-50%); border-radius: 50%; background: var(--verde); box-shadow: 0 0 8px var(--verde); }
+.maquina-turing small { position: absolute; bottom: 5px; left: 10px; color: #8fa68d; font: 700 6px "Space Mono", monospace; letter-spacing: .4px; }
+
+#jogo .leitura { position: relative; overflow: hidden; border-color: #5b7550; background: radial-gradient(circle at 50% 30%, #182417, #070a08 70%); box-shadow: inset 0 0 28px #b8ff2c0c; }
+#jogo .leitura::before { content: "LEITURA DA FITA // DADOS EM FLUXO"; position: absolute; top: 7px; left: 10px; color: #b8ff2c66; font: 700 6px "Space Mono", monospace; letter-spacing: 1px; }
+#jogo .leitura::after { content: "0 1 0 1 0 1 0 1"; position: absolute; bottom: 6px; right: 9px; color: #b8ff2c2e; font: 700 7px "Space Mono", monospace; letter-spacing: 4px; }
+#jogo .leitura-label { color: #c4d4bc; }
+#jogo #resposta { caret-color: var(--verde); border-color: #628658; background: linear-gradient(90deg, #071007, #0b0d0b); }
+#jogo #resposta::placeholder { color: #84967f; }
+#jogo #formResposta::before { content: "> TERMINAL DE RESPOSTA"; display: block; margin-bottom: 5px; color: #b8ff2c88; font: 700 7px "Space Mono", monospace; letter-spacing: .7px; }
+#jogo #letrasReveladas { border-color: #526c48; background: #080d09; box-shadow: inset 0 0 18px #b8ff2c0a; }
+
+.turing-recebendo .cabeca-turing { animation: leitura-turing .65s ease-in-out 2; }
+.turing-recebendo .fita-turing i { animation-duration: 1.2s; }
+.turing-acerto .cabeca-turing { border-color: #d9ff7a; background: #263c21; box-shadow: 0 0 25px var(--verde); transform: translateX(7px); transition: .35s; }
+.turing-erro .cabeca-turing { border-color: #ff8b63; box-shadow: 0 0 18px #ff8b6399; animation: falha-turing .18s linear 3; }
+.turing-dica .cabeca-turing { border-color: #58d7e9; box-shadow: 0 0 19px #58d7e9aa; }
+.turing-revelar .cabeca-turing { animation: varrer-turing .9s ease-in-out; }
+.turing-sinal .cabeca-turing { border-color: #ffcf4b; box-shadow: 0 0 20px #ffcf4b; }
+
+@keyframes girar-rolo { to { transform: rotate(360deg); } }
+@keyframes mover-fita { 50% { transform: translateX(-38px); } }
+@keyframes leitura-turing { 50% { transform: translateX(13px); box-shadow: 0 0 24px var(--verde); } }
+@keyframes falha-turing { 50% { transform: translateX(-4px); } }
+@keyframes varrer-turing { 25% { transform: translateX(-36px); } 70% { transform: translateX(36px); } }
+
+@media (max-width: 760px) {
+  .maquina-turing { grid-template-columns: 23px minmax(0,1fr) 28px 23px; padding-inline: 7px; gap: 4px; }
+  .rolo-turing { width: 22px; height: 22px; }
+  .cabeca-turing { width: 26px; height: 29px; }
+  .fita-turing i { font-size: 8px; letter-spacing: 4px; }
+  .maquina-turing small { font-size: 5px; }
+  #jogo .painel::after { opacity: .13; }
+}
+
+/* Ajustes de leitura: grupos binarios continuam cruzando a fita com mais naturalidade. */
+.fita-turing i {
+  left: -38%;
+  top: 6px;
+  color: #d9ff7a;
+  letter-spacing: 2px;
+  word-spacing: 3px;
+  animation: cruzar-fita 8s linear infinite;
+}
+
+.cabeca-turing {
+  width: 30px;
+  height: 29px;
+  border-color: #9ecf59;
+  border-radius: 3px 3px 5px 5px;
+  background: linear-gradient(180deg, #1c2e1b, #0a110a);
+  box-shadow: 0 0 9px #b8ff2c77, inset 0 0 9px #b8ff2c1d;
+}
+
+.cabeca-turing::before { top: -7px; left: 8px; width: 11px; height: 6px; border-color: #9ecf59; }
+.cabeca-turing::after { content: ""; position: absolute; left: 50%; bottom: -7px; width: 2px; height: 7px; transform: translateX(-50%); background: #b8ff2c; box-shadow: 0 0 8px var(--verde); }
+.cabeca-turing b { top: 7px; width: auto; height: auto; background: transparent; color: var(--verde-claro); box-shadow: none; font: 700 7px "Space Mono", monospace; letter-spacing: -1px; }
+
+.recebimento-turing { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; }
+.recebimento-turing span { position: absolute; color: var(--verde-claro); font: 700 9px "Space Mono", monospace; text-shadow: 0 0 7px var(--verde); animation: surgir-bit-recebido .25s steps(2, end) both; }
+.turing-carregando .fita-turing i { opacity: 0; animation-play-state: paused; }
+.turing-carregando .fita-turing { border-color: #b8ff2c; box-shadow: inset 0 0 14px #b8ff2c44; }
+.turing-estatica .fita-turing::after { content: "011001 01 1001 010 11"; position: absolute; inset: 0; display: grid; place-items: center; color: #d9ff7a; background: repeating-linear-gradient(0deg, #b8ff2c18 0 2px, transparent 3px 5px); font: 700 8px "Space Mono", monospace; letter-spacing: 4px; animation: estatica-fita .13s steps(2, end) 3; }
+
+.nivel.nivel-atualizando { min-width: 76px; border-color: #6f7d68; color: #aeb8ac; font-size: 6px; animation: estatica-nivel .12s steps(2, end) 3; }
+.nivel.nivel-entrada { animation: nivel-terminal .35s ease both; }
+.nivel[data-nivel-turing="facil"] { color: var(--verde); border-color: #4d7b44; }
+.nivel[data-nivel-turing="medio"] { color: #ffcf4b; border-color: #a17c28; }
+.nivel[data-nivel-turing="dificil"] { color: #ff6b5b; border-color: #bd4b40; }
+.maquina-turing.canal-trocando small { animation: estatica-nivel .13s steps(2, end) 3; }
+.maquina-turing.canal-raro { border-color: #a98a2c; box-shadow: inset 0 0 18px #ffcf4b22; }
+.maquina-turing.canal-raro .cabeca-turing { border-color: #ffcf4b; box-shadow: 0 0 16px #ffcf4b88; }
+
+@keyframes cruzar-fita { from { transform: translateX(-12%); } to { transform: translateX(104%); } }
+@keyframes surgir-bit-recebido { from { opacity: 0; transform: translateY(6px) scale(.7); } to { opacity: 1; transform: none; } }
+@keyframes estatica-fita { 50% { opacity: .25; transform: translateX(2px); } }
+@keyframes estatica-nivel { 50% { opacity: .25; transform: translateX(2px); } }
+@keyframes nivel-terminal { from { opacity: 0; transform: translateY(-4px) scale(.9); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 760px) {
+  .fita-turing i { left: -58%; font-size: 7px; letter-spacing: 1px; word-spacing: 1px; animation-duration: 7s; }
+  .cabeca-turing { width: 25px; height: 27px; }
+  .cabeca-turing b { font-size: 6px; }
+  .recebimento-turing span { font-size: 7px; }
+}
+
+.menu-mobile { display: none; }
+
+@media (max-width: 760px) {
+  #voltarMenu { display: none; }
+  .menu-mobile {
+    position: fixed;
+    top: 72px;
+    right: 12px;
+    z-index: 12;
+    display: block;
+    min-height: 35px;
+    padding: 0 10px;
+    border-color: #64885a;
+    background: #0a100add;
+    color: var(--verde);
+    font-size: 8px;
+    box-shadow: 0 0 13px #000a;
+  }
+}
+
+@media (max-width: 760px) {
+  #voltarMenu { display: block; }
+  .menu-mobile { display: none; }
+}

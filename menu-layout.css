@@ -1,0 +1,68 @@
+/* Layout final do menu de computador: composicao centralizada e ampliada. */
+@media (min-width: 781px) {
+  .menu-tela {
+    grid-template-columns: 290px minmax(430px, 470px);
+    gap: clamp(28px, 3vw, 48px);
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    min-height: 100dvh;
+    padding: 24px;
+  }
+
+  .menu-tela .guia-menu {
+    width: 290px;
+    max-width: 290px;
+    margin-top: 0 !important;
+    align-self: center !important;
+    justify-self: center;
+    transform: scale(1.08);
+    transform-origin: center;
+  }
+
+  .menu-tela .menu-cartao {
+    width: 470px;
+    max-width: 100%;
+    padding: 36px 38px;
+    justify-self: center;
+  }
+
+  .menu-tela .menu-cartao h1 {
+    font-size: clamp(40px, 3.3vw, 46px);
+    line-height: 1.08;
+    letter-spacing: 2px;
+    overflow-wrap: normal;
+    word-break: normal;
+    white-space: nowrap;
+  }
+
+  .menu-tela .menu-cartao h1 em {
+    margin-top: 3px;
+  }
+
+  .menu-tela .entrada-simples > p {
+    margin: 5px 0 13px;
+  }
+
+  .menu-tela .menu-acoes {
+    margin: 16px 0 11px;
+    padding-top: 14px;
+  }
+
+  .menu-tela .aviso-local {
+    margin-top: 13px;
+  }
+
+  .menu-tela .menu-cartao input {
+    min-height: 46px;
+  }
+
+  .menu-tela .entrada-simples #entrarJogo {
+    min-height: 60px;
+  }
+
+  .menu-tela .fala-menu-bino {
+    font-size: 12px;
+    padding: 16px;
+  }
+}
